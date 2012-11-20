@@ -1,0 +1,10 @@
+{
+	"logger": {
+		"category2": {
+			"console": {
+				"level": "silly",
+				"colorize": "true"
+			}
+		}
+	}
+}
