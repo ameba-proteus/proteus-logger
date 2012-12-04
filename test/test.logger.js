@@ -13,12 +13,12 @@ describe('logger', function() {
 					}
 				}
 			});
-			var log = logger.logger('category1');
+			var log = logger.get('category1');
 			log.transports['console']['level'].should.equal('warn');
 		});
 		it('can configure from configurator', function() {
 			configurator.configure('./test/config/logger.json');
-			var log = logger.logger('category2');
+			var log = logger.get('category2');
 			log.transports['console']['level'].should.equal('silly');
 		});
 	});

@@ -15,7 +15,7 @@
 	"homepage": "https://github.com/ameba-proteus/proteus-logger",
 	"dependencies": {
 		"winston": "*",
-		"proteus-configurator": "git://github.com/ameba-proteus/proteus-configurator.git#master"
+		"proteus-configurator": "*"
 	},
 	"devDependencies": {
 		"mocha": "*",
