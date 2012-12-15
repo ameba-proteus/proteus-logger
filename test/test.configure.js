@@ -14,12 +14,12 @@ describe('logger', function() {
 					}
 				}
 			});
-			var logger = proteusLogger.logger('category1');
+			var logger = proteusLogger.get('category1');
 			logger.transports['console']['level'].should.equal('warn');
 		});
 		it('can configure from configurator', function() {
 			configurator.configure(__dirname + '/config/logger.json');
-			var logger = proteusLogger.logger('category2');
+			var logger = proteusLogger.get('category2');
 			logger.transports['console']['level'].should.equal('silly');
 		});
 	});
