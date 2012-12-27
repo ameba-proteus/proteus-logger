@@ -8,8 +8,11 @@ proteus-logger
 
 # English
 
+## About
+
 Proteus Logger is a logging framework to support application logging.
-This module collaborate with Proteus Cluster to support logging under the clustered environment (under the clustered environment, workers sends log data to the master, and master unify the log management).
+
+This module collaborate with [Proteus Cluster](https://github.com/ameba-proteus/proteus-cluster)  to support logging under the clustered environment (under the clustered environment, workers sends log data to the master, and master unify the log management).
 
 Recent version uses [Winston](https://github.com/flatiron/winston) for core library.
 Proteus Logger also provides date-time based file rotation, which Winston does not provides.
@@ -133,8 +136,11 @@ You can use the following meta characters in datePattern.
 
 # 日本語
 
+## 説明
+
 Proteus Logger は、アプリケーションのログ出力をサポートするためのロギングフレームワークです。
-Proteus Cluster と連携し、node.js の cluster 環境におけるログ出力をサポートします（Cluster 利用時、worker は master にログ情報を受け渡し、master 側で一元的にログが出力されます）。
+
+[Proteus Cluster](https://github.com/ameba-proteus/proteus-cluster) と連携し、node.js の cluster 環境におけるログ出力をサポートします（Cluster 利用時、worker は master にログ情報を受け渡し、master 側で一元的にログが出力されます）。
 
 現行バージョンでは、ログのコアライブラリに [Winston](https://github.com/flatiron/winston) を採用しています。
 Proteus Loggerでは、Winstonには存在しない日時ベースのファイルローテート機能も用意しています。
