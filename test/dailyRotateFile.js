@@ -6,7 +6,7 @@ proteusLogger.configure({
 			level: 'warn',
 			colorize: 'true',
 			filename: 'dailyRotateFile.log',
-			datePattern: '.yyyy-MM-dd-HH-mm',
+			datePattern: '.yyyyMMdd_HHmm',
 			maxsize: 20000
 		}
 	}
