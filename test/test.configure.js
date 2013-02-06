@@ -7,20 +7,28 @@ describe('logger', function() {
 	describe('#configure', function() {
 		it('can configure', function() {
 			proteusLogger.configure({
-				category1: {
-					console: {
-						level: 'warn',
-						colorize: 'true'
+				appenders: {
+					con: {
+						type: 'console'
+					}
+				},
+				loggers: {
+					category1: {
+						appenders: ['con']
 					}
 				}
 			});
 			var logger = proteusLogger.get('category1');
-			logger.transports['console']['level'].should.equal('warn');
+			console.log();
+			logger.info('test test test');
+			logger.error('test test test', new Error("YOYO"));
+			logger.warn('test test test');
+			logger.debug('test test test');
+			logger.fatal('test test test');
 		});
 		it('can configure from configurator', function() {
 			configurator.configure(__dirname + '/config/logger.json');
-			var logger = proteusLogger.get('category2');
-			logger.transports['console']['level'].should.equal('silly');
+			var logger = proteusLogger.get('category1');
 		});
 	});
 });

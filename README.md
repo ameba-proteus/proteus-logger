@@ -14,7 +14,6 @@ Proteus Logger is a logging framework to support application logging.
 
 This module collaborate with [Proteus Cluster](https://github.com/ameba-proteus/proteus-cluster)  to support logging under the clustered environment (under the clustered environment, workers sends log data to the master, and master unify the log management).
 
-Recent version uses [Winston](https://github.com/flatiron/winston) for core library.
 Proteus Logger also provides date-time based file rotation, which Winston does not provides.
 
 
@@ -29,10 +28,13 @@ To initialize logger, call configure() or define logger info using Proteus Confi
 ```js
 var proteusLogger = require('proteus-logger');
 proteusLogger.configure({
-  logger1: {
-    console: {
-      colorize: true,
-      timestamp: true
+  appenders: {
+    console: { type: 'console' }
+  }
+  loggers: {
+    logger1: {
+      level: 'info',
+      appenders: ['console']
     }
   }
 });
@@ -42,12 +44,13 @@ proteusLogger.configure({
 
 ```js
 {
-  "logger": {
+  "appenders": {
+    "console": { "type": "console" }
+  },
+  "loggers": {
     "category2": {
-      "console": {
-        "colorize": "true",
-        "timestamp": "true"
-      }
+      "level": "info",
+      "appenders": ["console"]
     }
   }
 }
@@ -59,20 +62,123 @@ proteusLogger.configure({
 var logger = require('proteus-logger').get('category1');
 logger.info('this is the information log');
 logger.warn('this is the warning log');
-logger.error('this is the error log');
+logger.error('this is the error log', err);
 ```
 
-### date-time based file rotatation
+### Layout configuration
+```js
+require('proteus-logger').configure({
+  appenders: {
+    console: {
+      type: 'console',
+      layout: {
+        pattern: '%yyyy-%MM-%dd %HH:%mm:%ss %loggerc %msg %argsc (%linec)%nstack'
+      }
+    }
+  }
+});
+
+##### defined patterns
+
+<table>
+<thead>
+<tr>
+  <th>meta characters</th>
+  <th>comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>yyyy</td>
+  <td>Year (4 digits)</td>
+</tr>
+<tr>
+  <td>MM</td>
+  <td>Month</td>
+</tr>
+<tr>
+  <td>dd</td>
+  <td>Date</td>
+</tr>
+<tr>
+  <td>HH</td>
+  <td>Hour (2 digits)</td>
+</tr>
+<tr>
+  <td>mm</td>
+  <td>Minute (2 digits)</td>
+</tr>
+<tr>
+  <td>ss</td>
+  <td>Seconds (2 digits)</td>
+</tr>
+<tr>
+  <td>T</td>
+  <td>Just 'T' to split date and time.</td>
+</tr>
+<tr>
+  <td>level</td>
+  <td>Logged level</td>
+</tr>
+<tr>
+  <td>levelc</td>
+  <td>Logged level (colored)</td>
+</tr>
+<tr>
+  <td>logger</td>
+  <td>Logger name</td>
+</tr>
+<tr>
+  <td>loggerc</td>
+  <td>Logger name (colored)</td>
+</tr>
+<tr>
+  <td>msg</td>
+  <td>Logging message</td>
+</tr>
+<tr>
+  <td>error</td>
+  <td>Error mesage</td>
+</tr>
+<tr>
+  <td>stack</td>
+  <td>Stack trace of the error without line break.</td>
+</tr>
+<tr>
+  <td>nstack</td>
+  <td>Stack trace of the error with line break before trace.</td>
+</tr>
+<tr>
+  <td>line</td>
+  <td>File name and line number</td>
+</tr>
+<tr>
+  <td>linec</td>
+  <td>File name and line number (colored)</td>
+</tr>
+</tr>
+<tr>
+  <td>n</td>
+  <td>Line break</td>
+</tr>
+</tbody>
+</table>
+
+### date-time based file rotation
 
 ```js
 proteusLogger.configure({
-  category1: {
-    dailyRotateFile: {
-      level: 'warn',
-      colorize: 'true',
-      filename: 'dailyRotateFile.log',
-      datePattern: '.yyyy-MM-dd',
-      maxsize: 20000
+  "appenders": {
+    "file": {
+      "type": "dailyRotateFile",
+      "filename": "dailyRotateFile.log",
+      "datePattern": "yyyy-MM-dd"
+    }
+  },
+  "loggers": {
+    "category": {
+      "level": "info",
+      "appenders": ["file"]
     }
   }
 });
@@ -142,8 +248,7 @@ Proteus Logger は、アプリケーションのログ出力をサポートす�
 
 [Proteus Cluster](https://github.com/ameba-proteus/proteus-cluster) と連携し、node.js の cluster 環境におけるログ出力をサポートします（Cluster 利用時、worker は master にログ情報を受け渡し、master 側で一元的にログが出力されます）。
 
-現行バージョンでは、ログのコアライブラリに [Winston](https://github.com/flatiron/winston) を採用しています。
-Proteus Loggerでは、Winstonには存在しない日時ベースのファイルローテート機能も用意しています。
+Proteus Logger は日付ベースのログローテーションに対応しています。
 
 ## 利用方法
 
@@ -156,10 +261,13 @@ Proteus Logger は、 configure() を呼び出すか、Proteus Configurator に�
 ```js
 var proteusLogger = require('proteus-logger');
 proteusLogger.configure({
-  logger1: {
-    console: {
-      colorize: true,
-      timestamp: true
+  appenders: {
+    console: { type: 'console' }
+  }
+  loggers: {
+    logger1: {
+      level: 'info',
+      appenders: ['console']
     }
   }
 });
@@ -168,16 +276,18 @@ proteusLogger.configure({
 #### Proteus Configuratorを利用
 
 ```js
-{
-  "logger": {
-    "category2": {
-      "console": {
-        "colorize": "true",
-        "timestamp": "true"
-      }
+var proteusLogger = require('proteus-logger');
+proteusLogger.configure({
+  appenders: {
+    console: { type: 'console' }
+  }
+  loggers: {
+    logger1: {
+      level: 'info',
+      appenders: ['console']
     }
   }
-}
+});
 ```
 
 ### Loggerの取得
@@ -186,20 +296,123 @@ proteusLogger.configure({
 var logger = require('proteus-logger').get('category1');
 logger.info('this is the information log');
 logger.warn('this is the warning log');
-logger.error('this is the error log');
+logger.error('this is the error log', err);
 ```
+
+### レイアウトパターンの利用
+```js
+require('proteus-logger').configure({
+  appenders: {
+    console: {
+      type: 'console',
+      layout: {
+        pattern: '%yyyy-%MM-%dd %HH:%mm:%ss %loggerc %msg %argsc (%linec)%nstack'
+      }
+    }
+  }
+});
+
+##### レイアウトで利用可能なパターン文字列
+
+<table>
+<thead>
+<tr>
+  <th>meta characters</th>
+  <th>comments</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>yyyy</td>
+  <td>Year (4 digits)</td>
+</tr>
+<tr>
+  <td>MM</td>
+  <td>Month</td>
+</tr>
+<tr>
+  <td>dd</td>
+  <td>Date</td>
+</tr>
+<tr>
+  <td>HH</td>
+  <td>Hour (2 digits)</td>
+</tr>
+<tr>
+  <td>mm</td>
+  <td>Minute (2 digits)</td>
+</tr>
+<tr>
+  <td>ss</td>
+  <td>Seconds (2 digits)</td>
+</tr>
+<tr>
+  <td>T</td>
+  <td>Just 'T' to split date and time.</td>
+</tr>
+<tr>
+  <td>level</td>
+  <td>Logged level</td>
+</tr>
+<tr>
+  <td>levelc</td>
+  <td>Logged level (colored)</td>
+</tr>
+<tr>
+  <td>logger</td>
+  <td>Logger name</td>
+</tr>
+<tr>
+  <td>loggerc</td>
+  <td>Logger name (colored)</td>
+</tr>
+<tr>
+  <td>msg</td>
+  <td>Logging message</td>
+</tr>
+<tr>
+  <td>error</td>
+  <td>Error mesage</td>
+</tr>
+<tr>
+  <td>stack</td>
+  <td>Stack trace of the error without line break.</td>
+</tr>
+<tr>
+  <td>nstack</td>
+  <td>Stack trace of the error with line break before trace.</td>
+</tr>
+<tr>
+  <td>line</td>
+  <td>File name and line number</td>
+</tr>
+<tr>
+  <td>linec</td>
+  <td>File name and line number (colored)</td>
+</tr>
+</tr>
+<tr>
+  <td>n</td>
+  <td>Line break</td>
+</tr>
+</tbody>
+</table>
 
 ### 日時ベースのファイルローテート
 
 ```js
 proteusLogger.configure({
-  category1: {
-    dailyRotateFile: {
-      level: 'warn',
-      colorize: 'true',
-      filename: 'dailyRotateFile.log',
-      datePattern: '.yyyy-MM-dd',
-      maxsize: 20000
+  "appenders": {
+    "file": {
+      "type": "dailyRotateFile",
+      "filename": "dailyRotateFile.log",
+      "datePattern": "yyyy-MM-dd"
+    }
+  },
+  "loggers": {
+    "category": {
+      "level": "info",
+      "appenders": ["file"]
     }
   }
 });
