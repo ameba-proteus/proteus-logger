@@ -66,6 +66,7 @@ logger.error('this is the error log', err);
 ```
 
 ### Layout configuration
+
 ```js
 require('proteus-logger').configure({
   appenders: {
@@ -77,6 +78,7 @@ require('proteus-logger').configure({
     }
   }
 });
+```
 
 ##### defined patterns
 
@@ -300,6 +302,7 @@ logger.error('this is the error log', err);
 ```
 
 ### レイアウトパターンの利用
+
 ```js
 require('proteus-logger').configure({
   appenders: {
@@ -311,6 +314,7 @@ require('proteus-logger').configure({
     }
   }
 });
+```
 
 ##### レイアウトで利用可能なパターン文字列
 
