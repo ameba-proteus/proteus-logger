@@ -1,6 +1,6 @@
 {
 	"name": "proteus-logger",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"scripts": {
 		"start": "node app",
 		"test": "find test -type f -name 'test*.js' -print | xargs ./node_modules/.bin/mocha --reporter tap"
@@ -11,7 +11,7 @@
 	},
 	"homepage": "https://github.com/ameba-proteus/proteus-logger",
 	"dependencies": {
-		"proteus-configurator": "git+ssh://git@github.com:ameba-proteus/proteus-configurator.git#develop",
+		"proteus-configurator": "git+ssh://git@github.com:ameba-proteus/proteus-configurator.git#v1.0.0",
 		"cli-color": "0.2.x"
 	},
 	"devDependencies": {
