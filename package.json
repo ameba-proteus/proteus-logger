@@ -1,6 +1,6 @@
 {
 	"name": "proteus-logger",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"scripts": {
 		"start": "node app",
 		"test": "find test -type f -name 'test*.js' -print | xargs ./node_modules/.bin/mocha --reporter tap"
@@ -9,13 +9,10 @@
 		"type": "git",
 		"url": "https://github.com/ameba-proteus/proteus-logger.git"
 	},
-	"publishConfig": {
-		"registry": "http://npm.pecolodge.com"
-	},
 	"homepage": "https://github.com/ameba-proteus/proteus-logger",
 	"dependencies": {
-		"winston": "*",
-		"proteus-configurator": "git://github.com/ameba-proteus/proteus-configurator.git#master"
+		"proteus-configurator": "git+ssh://git@github.com:ameba-proteus/proteus-configurator.git#v1.0.0",
+		"cli-color": "0.2.x"
 	},
 	"devDependencies": {
 		"mocha": "*",
