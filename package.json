@@ -11,8 +11,10 @@
 	},
 	"homepage": "https://github.com/ameba-proteus/proteus-logger",
 	"dependencies": {
-		"proteus-configurator": "git+ssh://git@github.com:ameba-proteus/proteus-configurator.git#v1.0.0",
 		"cli-color": "0.2.x"
+	},
+	"engines": {
+		"node": ">=0.10.0"
 	},
 	"devDependencies": {
 		"mocha": "*",
