@@ -1,6 +1,6 @@
 {
 	"name": "proteus-logger",
-	"version": "1.1.5",
+	"version": "1.1.6",
 	"scripts": {
 		"start": "node app",
 		"test": "find test -type f -name 'test*.js' -print | xargs ./node_modules/.bin/mocha --reporter tap"
