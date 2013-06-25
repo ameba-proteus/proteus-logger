@@ -1,23 +1,23 @@
 {
-	"name": "proteus-logger",
-	"version": "1.1.6",
-	"scripts": {
-		"start": "node app",
-		"test": "find test -type f -name 'test*.js' -print | xargs ./node_modules/.bin/mocha --reporter tap"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/ameba-proteus/proteus-logger.git"
-	},
-	"homepage": "https://github.com/ameba-proteus/proteus-logger",
-	"dependencies": {
-		"cli-color": "0.2.x"
-	},
-	"engines": {
-		"node": ">=0.10.0"
-	},
-	"devDependencies": {
-		"mocha": "*",
-		"should": "*"
-	}
+  "name": "proteus-logger",
+  "version": "1.1.7",
+  "scripts": {
+    "start": "node app",
+    "test": "find test -type f -name 'test*.js' -print | xargs ./node_modules/.bin/mocha --reporter tap"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ameba-proteus/proteus-logger.git"
+  },
+  "homepage": "https://github.com/ameba-proteus/proteus-logger",
+  "dependencies": {
+    "cli-color": "0.2.x"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  }
 }
