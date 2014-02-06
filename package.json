@@ -11,7 +11,7 @@
   },
   "homepage": "https://github.com/ameba-proteus/proteus-logger",
   "dependencies": {
-    "cli-color": "0.2.x"
+    "chalk": "^0.4.0"
   },
   "engines": {
     "node": ">=0.10.0"
