@@ -21,7 +21,7 @@ describe('logger', function() {
       logger.info('test test test');
       logger.error('test test test', new Error("YOYO"));
       logger.warn('test test test');
-      logger.debug('test test test');
+      logger.debug('test test test', { test: 'value' });
       logger.fatal('test test test');
       done();
     });
