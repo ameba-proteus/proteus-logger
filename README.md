@@ -108,6 +108,10 @@ require('proteus-logger').configure({
   <td>Seconds (2 digits)</td>
 </tr>
 <tr>
+  <td>sss</td>
+  <td>Milliseconds (3 digits)</td>
+</tr>
+<tr>
   <td>T</td>
   <td>Just 'T' to split date and time.</td>
 </tr>
