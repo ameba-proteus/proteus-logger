@@ -155,6 +155,13 @@ require('proteus-logger').configure({
   <td>linec</td>
   <td>File name and line number (colored)</td>
 </tr>
+<tr>
+  <td>path</td>
+  <td>Relative path and line number</td>
+</tr>
+<tr>
+  <td>pathc</td>
+  <td>Relative path and line number (colored)</td>
 </tr>
 <tr>
   <td>n</td>
