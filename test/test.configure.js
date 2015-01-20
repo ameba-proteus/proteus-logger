@@ -1,4 +1,4 @@
-/*global describe:true,it:true*/
+/*global describe:true,it:true,before:true*/
 
 var loggers = require('../lib/logger');
 
@@ -77,6 +77,36 @@ describe('logger', function() {
       logger.debug('test test test', { test: 'value' });
       logger.fatal('test test test');
       done();
+    });
+  });
+
+  describe('#layout', function() {
+    describe('string format', function() {
+      before(function() {
+        loggers.configure({
+          appenders: {
+            stack: {
+              type: 'console',
+              layout: { pattern: '%stack' }
+            }
+          },
+          loggers: {
+            stack: {
+              appenders: ['stack']
+            }
+          }
+        });
+      });
+
+      it('%stack', function(done) {
+        var logger = loggers.get('stack');
+        logger.debug('test debug', new Error("debug"));
+        logger.info('test info', new Error("info"));
+        logger.warn('test warn', new Error("warn"));
+        logger.error('test error', new Error("error"));
+        logger.fatal('test fatal', new Error("fatal"));
+        done();
+      });
     });
   });
 });
