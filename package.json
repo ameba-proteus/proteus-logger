@@ -3,7 +3,7 @@
   "version": "1.2.7",
   "scripts": {
     "start": "node app",
-    "test": "find test -type f -name 'test*.js' -print | xargs ./node_modules/.bin/mocha --reporter tap"
+    "test": "XUNIT_FILE=test-report.xml node_modules/.bin/mocha --reporter xunit-file"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "mocha": "^2.1.0",
-    "expect.js": "^0.3.0"
+    "expect.js": "^0.3.0",
+    "xunit-file": "^0.0.5"
   }
 }
