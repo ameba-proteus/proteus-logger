@@ -84,7 +84,4 @@ describe('layouts', function() {
     });
   });
 
-  describe('json format', function() {
-
-  });
 });
