@@ -62,7 +62,7 @@ describe('layouts', function() {
       var layout = createLayout({ pattern: '%path' }, {
         levels: globalConfig.levels,
         colors: globalConfig.colors,
-        basedir: path.basename(__dirname)
+        basedir: path.dirname(process.argv[1])
       });
       var date = new Date();
       var result = layout.call(this, 0, date, 'test test test', []);
@@ -71,8 +71,13 @@ describe('layouts', function() {
       expect(s).to.have.length(2);
       expect(path.extname(s[0])).to.be.eql('.js');
       expect(s[0].indexOf('/')).to.not.be(-1);
-      // 'test/'を起点とした相対パスのため "../node_modules/..." になるはず
-      expect(s[0].slice(0, 16)).to.be.eql('../node_modules/');
+      // mochaの実行パスを起点した相対パスのため "../lib/runnable.js" になるはず
+      // /path/to/mocha
+      //   |- bin        <- ここがbasedir
+      //   |   |- mocha  <- process.argv[1]
+      //   |- lib
+      //       |- runnable.js
+      expect(s[0]).to.be.eql('../lib/runnable.js');
     });
 
     it('%pid', function() {
