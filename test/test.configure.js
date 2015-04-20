@@ -1,5 +1,7 @@
 /*global describe:true,it:true,before:true*/
 
+var expect = require('expect.js');
+
 var loggers = require('../lib/logger');
 
 describe('logger', function() {
@@ -23,6 +25,8 @@ describe('logger', function() {
       logger.warn('test test test');
       logger.debug('test test test', { test: 'value' });
       logger.fatal('test test test');
+      // can save option
+      expect(logger.option).to.eql({ appenders: ['con'] });
       done();
     });
 
